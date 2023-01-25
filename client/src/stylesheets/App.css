@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* :root { */
+  /* --my-color: #fff; */
+  /* or any other variables/style */
+/* } */
+[data-theme='forest'] {
+  /* --bc: hsl(0 11.727% 81.608%); */
+  --rounded-btn: 0.5rem;
+}
+/* [data-theme='bumblebee'] { */
+  /* --my-color: #ffabc8; */
+/* } */
+
+/* .App-logo {
+  height: 40vmin;
+  pointer-events: none;
+} */
+
+.App {
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
