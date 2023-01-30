@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const LoginForm = () => {
+const LoginForm = ({loginFormHidden}) => {
   const [errors, setErrors] = useState([]);
   const [formData, setFormData] = useState({
     username: '',
@@ -37,62 +37,54 @@ const LoginForm = () => {
   console.log(formData);
 
   return (
-    <form onSubmit={handleSubmit}>
-      {/* Username */}
-      <div className="form-control w-full max-w-xs">
-        <label className="label">
-          <span className="label-text">What is your username?</span>
-        </label>
-        <input
-          required
-          type="text"
-          placeholder="Username"
-          name="username"
-          className="input input-bordered w-full max-w-xs"
-          value={formData.username}
-          onChange={handleChange}
-        />
-        <label className="label">
-          <span className="label-text-alt">INSERT RESTRICTIONS</span>
-          <span className="label-text-alt">Alt label</span>
-        </label>
-      </div>
+    <div
+      tabIndex={0}
+      className="dropdown-content dropdown-open menu p-2 shadow bg-base-100 rounded-box w-52 mr-16"
+      style={{visibility: loginFormHidden}}
+    >
+      <form onSubmit={handleSubmit}>
+        {/* Username */}
+        <div className="form-control w-full max-w-xs my-1">
+          <input
+            required
+            type="text"
+            placeholder="Username"
+            name="username"
+            className="input input-bordered input-sm w-full max-w-xs"
+            value={formData.username}
+            onChange={handleChange}
+          />
+        </div>
 
-      {/* Password */}
-      <div className="form-control w-full max-w-xs">
-        <label className="label">
-          <span className="label-text">Enter password</span>
-        </label>
-        <input
-          required
-          type="password"
-          placeholder="Password"
-          name="password"
-          className="input input-bordered w-full max-w-xs"
-          value={formData.password}
-          onChange={handleChange}
-        />
-        <label className="label">
-          <span className="label-text-alt">INSERT RESTRICTIONS</span>
-          <span className="label-text-alt">Alt label</span>
-        </label>
-      </div>
+        {/* Password */}
+        <div className="form-control w-full max-w-xs my-1">
+          <input
+            required
+            type="password"
+            placeholder="Password"
+            name="password"
+            className="input input-bordered input-sm w-full max-w-xs"
+            value={formData.password}
+            onChange={handleChange}
+          />
+        </div>
 
-      {/* Submit */}
-      <button
-        className="btn btn-square btn-wide btn-accent"
-        type="submit"
-      >
-        Log In
-      </button>
-      {/* Remember Me */}
-      {/* <div className="form-control w-52">
-        <label className="cursor-pointer label">
-          <span className="label-text">Remember me</span>
-          <input type="checkbox" className="toggle toggle-secondary" />
-        </label>
-      </div> */}
-    </form>
+        {/* Submit */}
+        <button
+          className="btn btn-sm btn-wide btn-accent"
+          type="submit"
+        >
+          Log In
+        </button>
+        {/* Remember Me */}
+        {/* <div className="form-control w-52">
+          <label className="cursor-pointer label">
+            <span className="label-text">Remember me</span>
+            <input type="checkbox" className="toggle toggle-secondary" />
+          </label>
+        </div> */}
+      </form>
+    </div>
   );
 };
 

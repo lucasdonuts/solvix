@@ -5,11 +5,11 @@ import SignupForm from './SignupForm';
 const Home = () => {
   return(
     <>
-      <SignupForm />
+      {/* <SignupForm /> */}
       <hr />
       <LoginForm />
       <hr />
-      <Timer />
+      {/* <Timer /> */}
     </>
   )
 }
