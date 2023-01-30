@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import SignupForm from "./SignupForm";
 
-const LoginForm = ({loginFormHidden}) => {
+const LoginForm = ({ userFormHidden, handleSwitchFormClick }) => {
   const [errors, setErrors] = useState([]);
   const [formData, setFormData] = useState({
-    username: '',
-    password: ''
+    username: "",
+    password: "",
   });
 
   const handleChange = (e) => {
@@ -16,22 +18,22 @@ const LoginForm = ({loginFormHidden}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('/login', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+    fetch("/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
-    }).then(res => {
-      if(res.ok){
-        res.json().then(user => {
-          console.log(user)
-        })
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((user) => {
+          console.log(user);
+        });
       } else {
-        res.json().then(data => {
-          console.log(data.errors)
-          setErrors(data.errors)
+        res.json().then((data) => {
+          console.log(data.errors);
+          setErrors(data.errors);
         });
       }
-    })
+    });
   };
 
   console.log(formData);
@@ -39,8 +41,8 @@ const LoginForm = ({loginFormHidden}) => {
   return (
     <div
       tabIndex={0}
-      className="dropdown-content dropdown-open menu p-2 shadow bg-base-100 rounded-box w-52 mr-16"
-      style={{visibility: loginFormHidden}}
+      className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mr-16"
+      style={{ visibility: userFormHidden }}
     >
       <form onSubmit={handleSubmit}>
         {/* Username */}
@@ -70,10 +72,7 @@ const LoginForm = ({loginFormHidden}) => {
         </div>
 
         {/* Submit */}
-        <button
-          className="btn btn-sm btn-wide btn-accent"
-          type="submit"
-        >
+        <button className="btn btn-sm btn-wide btn-accent" type="submit">
           Log In
         </button>
         {/* Remember Me */}
@@ -84,6 +83,15 @@ const LoginForm = ({loginFormHidden}) => {
           </label>
         </div> */}
       </form>
+      <span className="flex mx-auto mt-3">
+        <p className="text-xs">Don't have an account?</p>
+        <p
+          onClick={handleSwitchFormClick}
+          className="cursor-pointer text-xs ml-3 text-secondary"
+        >
+          Sign up
+        </p>
+      </span>
     </div>
   );
 };

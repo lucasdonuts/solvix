@@ -1,15 +1,21 @@
 import { useState } from "react";
 import { HiUserCircle } from "react-icons/hi";
 import LoginForm from "./LoginForm";
+import SignupForm from "./SignupForm";
 
 const NavBar = () => {
-  const [loginFormHidden, setLoginFormHidden] = useState('hidden');
+  const [userFormHidden, setUserFormHidden] = useState("hidden");
+  const [formToDisplay, setFormToDisplay] = useState('login');
 
   const handleUserIconClick = () => {
-    setLoginFormHidden(() => {
-      return loginFormHidden === 'hidden' ? 'visible' : 'hidden'
+    setUserFormHidden(prev => {
+      return prev === "hidden" ? "visible" : "hidden";
     });
   };
+
+  const handleSwitchFormClick = () => {
+    setFormToDisplay(prev => prev === 'login' ? 'signup' : 'login')
+  }
 
   return (
     <div className="navbar bg-base-100">
@@ -69,26 +75,21 @@ const NavBar = () => {
             />
           </svg>
         </button>
-        {/* <button
-          onClick={handleUserIconClick}
-          className="btn btn-ghost btn-circle"
-        > */}
-          {/* <div className="indicator"> */}
-            {/* <span className="badge badge-xs badge-primary indicator-item"></span> */}
-          {/* </div> */}
-          {/* <HiUserCircle /> */}
-        {/* </button> */}
-        <div className="dropdown dropdown-bottom dropdown-end">
-          <label
-            tabIndex={0}
-            className="btn m-1"
-            onClick={handleUserIconClick}
-          >
+        <div className="dropdown dropdown-open dropdown-bottom dropdown-end">
+          <label tabIndex={0} className="btn m-1" onClick={handleUserIconClick}>
             <HiUserCircle />
           </label>
-          <LoginForm
-            loginFormHidden={loginFormHidden}
-          />
+          {
+            formToDisplay == 'login' ?
+              <LoginForm
+                userFormHidden={userFormHidden}
+                handleSwitchFormClick={handleSwitchFormClick}
+              /> :
+              <SignupForm
+                userFormHidden={userFormHidden}
+                handleSwitchFormClick={handleSwitchFormClick}
+              />
+          }
         </div>
       </div>
     </div>
